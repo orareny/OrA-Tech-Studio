@@ -1,0 +1,327 @@
+/* main.css — copied from Style.css (kept same styles) */
+
+/* Style.css — moved from inline <style> in Website.html
+   Modernized: color-scheme support, focus-visible, subtle transitions */
+
+:root{
+    --bg:#0f1724;
+    --card:#0b1220;
+    --accent:#6ee7b7;
+    --accent-2:#7c6cff;
+    --muted:#94a3b8;
+    --glass: rgba(255,255,255,0.03);
+    --radius:12px;
+    --maxw:1100px;
+    --text:#e6eef8;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    color-scheme: dark;
+}
+
+/* Light-mode overrides when user prefers light */
+@media (prefers-color-scheme: light){
+    :root{
+        --bg: #f7fafc;
+        --card: #ffffff;
+        --accent: #0b7285;
+        --accent-2:#4f46e5;
+        --muted:#5b6b76;
+        --glass: rgba(2,6,23,0.03);
+        --text:#0b1220;
+    }
+    body{background:radial-gradient(600px 400px at 10% 10%, rgba(99,102,241,0.04), transparent 12%), radial-gradient(500px 300px at 90% 90%, rgba(110,231,183,0.03), transparent 10%), var(--bg);}
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+    margin:0;
+    background:
+        radial-gradient(600px 400px at 10% 10%, rgba(110,231,183,0.06), transparent 12%),
+        radial-gradient(500px 300px at 90% 90%, rgba(99,102,241,0.04), transparent 10%),
+        var(--bg);
+    color:var(--text);
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    padding:32px 18px;
+    display:flex;
+    justify-content:center;
+    transition:background .3s ease, color .2s ease;
+}
+.container{
+    width:100%;
+    max-width:var(--maxw);
+}
+
+header{
+    display:flex;
+    justify-content:center; /* center the brand/logo horizontally */
+    align-items:center;
+    gap:16px;
+    margin-bottom:28px;
+}
+/* Ensure brand content stays centered and doesn't stretch on very wide screens */
+.brand{ display:flex; gap:12px; align-items:center; justify-content:center }
+.brand{
+    display:flex;
+    gap:12px;
+    align-items:center;
+    text-decoration:none;
+    color:inherit;
+}
+.logo{
+    width:44px;height:44px;border-radius:10px;
+    background:linear-gradient(135deg,var(--accent),var(--accent-2));
+    display:inline-grid;
+    place-items:center;
+    font-weight:700;color:#052018;
+    box-shadow:0 6px 30px rgba(2,6,23,0.45);
+}
+nav a{
+    color:var(--muted);
+    margin-left:18px;
+    text-decoration:none;
+    font-weight:600;
+    transition:color .16s, transform .12s;
+}
+nav a:hover{color:var(--accent); transform:translateY(-1px)}
+main{
+    background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+    border-radius:var(--radius);
+    padding:28px;
+    box-shadow: 0 6px 30px rgba(3,7,18,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
+}
+
+.hero{
+    display:grid;
+    grid-template-columns: 1fr 360px;
+    gap:28px;
+    align-items:center;
+}
+@media (max-width:880px){ .hero{grid-template-columns:1fr;}}
+
+/* center the left column content (heading, intro, CTA) so it appears in the middle */
+.hero > div{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+}
+.hero h1{
+    margin:0 0 10px 0;
+    font-size:28px;
+    line-height:1.05;
+}
+.hero p{color:var(--muted); margin:0 0 18px 0}
+.cta{
+    display:flex;
+    gap:12px;
+    margin-top:8px;
+}
+.btn{
+    background:var(--accent);
+    color:#022019;
+    border:none;
+    padding:10px 14px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:700;
+    box-shadow:0 6px 18px rgba(110,231,183,0.09);
+    text-decoration:none;
+    display:inline-flex;align-items:center;gap:8px;
+}
+.btn.ghost{
+    background:transparent;
+    border:1px solid rgba(255,255,255,0.06);
+    color:var(--muted);
+    font-weight:600;
+}
+
+.card{
+    background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+    border-radius:12px;
+    padding:14px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+}
+
+.quick{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    align-items:center; /* center card content horizontally */
+}
+.card.quick{
+    /* span the full hero area and center the quick card in the middle */
+    grid-column: 1 / -1;
+    justify-self: center;
+    max-width: 820px;
+    width: 100%;
+}
+.service-list{
+    display:grid;
+    /* two balanced columns with a fixed max width for each card so items sit centered */
+    grid-template-columns:repeat(2, minmax(180px, 260px));
+    gap:12px;
+    margin-top:18px;
+    justify-content:center; /* center the whole grid inside the card */
+    justify-items:center; /* center each grid cell's content */
+}
+@media (max-width:540px){
+    .service-list{grid-template-columns:1fr; justify-items:stretch}
+    .service{max-width:none; width:100%}
+}
+@media (min-width:881px){
+    /* tighten the quick card vertical spacing so it visually sits centered */
+    .hero { align-items: center; }
+}
+.service{
+    display:flex;
+    /* stack icon above text so the tile content is centered */
+    flex-direction:column;
+    gap:10px;
+    align-items:center;
+    padding:14px 16px;
+    background:var(--glass);
+    border-radius:10px;
+}
+.service svg{flex:0 0 56px; width:56px;height:56px; border-radius:10px; padding:10px}
+.service h4{margin:0;font-size:15px}
+.service p{ /* hidden per request: remove the small descriptive text under service headings */
+    display: none;
+    margin:6px 0 0 0;
+    color:var(--muted);
+    font-size:13px;
+    max-width:220px;
+}
+
+/* override inline top-row inside quick card (was justify-content:space-between) */
+.card.quick > div:first-child{ display:flex; justify-content:center !important; align-items:center; gap:18px; width:100%; }
+
+/* make service text centered */
+.card.quick .service > div{ text-align:center }
+
+@media (min-width:880px){
+    /* slightly larger tiles on wide screens */
+    .service{min-width:220px}
+}
+
+/* portfolio */
+.portfolio{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin-top:22px;
+}
+@media (max-width:980px){ .portfolio{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:640px){ .portfolio{grid-template-columns:1fr}}
+.project{
+    position:relative;
+    height:120px;
+    background:linear-gradient(120deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border-radius:10px;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    padding:12px;
+}
+.project h5{margin:0 0 6px 0}
+.tags{display:flex;gap:8px;flex-wrap:wrap}
+.tag{
+    background:rgba(255,255,255,0.03);
+    color:var(--muted);
+    padding:6px 8px;
+    border-radius:999px;
+    font-size:12px;
+}
+
+/* contact */
+.contact{
+    display:grid;
+    grid-template-columns:1fr 340px;
+    gap:18px;
+    margin-top:20px;
+}
+@media (max-width:880px){ .contact{grid-template-columns:1fr}}
+form{display:flex;flex-direction:column;gap:12px}
+input,textarea{
+    background:transparent;border:1px solid rgba(255,255,255,0.04);
+    color:inherit;padding:10px;border-radius:10px;outline:none;
+    font-size:14px;
+}
+textarea{min-height:120px;resize:vertical}
+.muted{color:var(--muted);font-size:13px}
+
+footer{
+    margin-top:18px;
+    text-align:center;
+    color:var(--muted);
+    font-size:13px;
+    padding-top:12px;
+}
+
+/* small helpers */
+.small{font-size:13px;color:var(--muted)}
+.success{
+    background:linear-gradient(90deg, rgba(110,231,183,0.08), rgba(124,108,255,0.05));
+    border:1px solid rgba(110,231,183,0.12);
+    padding:10px;border-radius:10px;color:var(--accent)
+}
+
+/* updates column */
+.updates-card{
+    background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+    border-radius:12px;
+    padding:14px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+}
+.update-item{
+    background:var(--glass);
+    padding:10px;border-radius:10px;margin-bottom:10px;
+}
+.update-item .muted{font-size:12px}
+
+/* accessibility & micro-interactions */
+a:focus, button:focus, input:focus, textarea:focus{
+    outline:3px solid rgba(124,108,255,0.12);
+    outline-offset:3px;
+}
+:where(.btn, nav a){ transition:transform .12s ease, box-shadow .12s ease }
+
+/* small responsive tweaks */
+@media (max-width:520px){
+    body{padding:20px 12px}
+    .logo{width:40px;height:40px}
+}
+
+/* Large CTA modifier for hero */
+.btn--large{
+    padding:14px 22px;
+    font-size:18px;
+    border-radius:14px;
+    box-shadow:0 10px 30px rgba(124,108,255,0.14), 0 6px 20px rgba(110,231,183,0.06);
+}
+
+@media (max-width:520px){
+    .btn--large{font-size:16px;padding:12px 18px}
+}
+
+/* utility */
+.visually-hidden{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap}
+
+/* Gradient text utility for a single word (modern, elegant neon-tinged) */
+.gradient-word{
+    /* fallback color for old browsers */
+    color: #00e0ff;
+    background: linear-gradient(90deg, #00e0ff 0%, #ff00d4 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent; /* Safari */
+    color: transparent; /* modern browsers */
+    font-weight:800;
+    display:inline-block;
+    /* subtle glow to make the gradient read nicely on dark backgrounds */
+    text-shadow: 0 2px 14px rgba(0,224,255,0.06), 0 1px 6px rgba(255,0,212,0.03);
+}
+
+/* Slightly larger variant if used in headings */
+.gradient-word--lg{font-size:1.06em}

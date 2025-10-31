@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Admin Dashboard — OrA Tech Studio</title>
+    <link rel="stylesheet" href="main.css">
+    <style>
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        .project-form {
+            display: grid;
+            gap: 12px;
+            margin-bottom: 32px;
+            padding: 20px;
+            background: var(--card);
+            border-radius: 12px;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        @media (max-width: 640px) {
+            .form-row { grid-template-columns: 1fr; }
+        }
+        .project-item {
+            padding: 16px;
+            background: var(--glass);
+            border-radius: 10px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .project-actions {
+            display: flex;
+            gap: 8px;
+        }
+        .btn-small {
+            padding: 6px 12px;
+            font-size: 13px;
+        }
+        .btn-danger {
+            background: #ff6b6b;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <main>
+            <div class="admin-header">
+                <div>
+                    <h2 style="margin:0">Project Manager</h2>
+                    <p class="muted" style="margin:4px 0 0 0">Add, edit and manage your portfolio projects</p>
+                </div>
+                <div style="display:flex;gap:8px;align-items:center">
+                    <button class="btn ghost btn-small" onclick="changePassword()">🔑 Change Password</button>
+                    <button class="btn ghost" id="logoutBtn">Logout</button>
+                </div>
+            </div>
+
+            <!-- Add/Edit Project Form -->
+            <div class="card">
+                <h3 style="margin:0 0 16px 0" id="formTitle">Add New Project</h3>
+                <form class="project-form" id="projectForm">
+                    <input type="hidden" id="projectId">
+                    
+                    <div class="form-row">
+                        <div>
+                            <label class="small" for="projectName">Project Name*</label>
+                            <input type="text" id="projectName" placeholder="e.g., Cloud Collaboration Tool" required>
+                        </div>
+                        <div>
+                            <label class="small" for="projectCategory">Category*</label>
+                            <select id="projectCategory" required>
+                                <option value="">Select category</option>
+                                <option value="software">Software Engineering</option>
+                                <option value="music">Music Production</option>
+                                <option value="games">Game Development</option>
+                                <option value="ai">AI & ML</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="small" for="projectDescription">Description</label>
+                        <textarea id="projectDescription" placeholder="Brief description of the project" rows="3"></textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <div>
+                            <label class="small" for="projectTags">Tags (comma-separated)</label>
+                            <input type="text" id="projectTags" placeholder="e.g., React, Node, SaaS">
+                        </div>
+                        <div>
+                            <label class="small" for="projectLink">Project Link (optional)</label>
+                            <input type="url" id="projectLink" placeholder="https://...">
+                        </div>
+                    </div>
+
+                    <div style="display:flex;gap:10px">
+                        <button class="btn" type="submit" id="submitBtn">Add Project</button>
+                        <button class="btn ghost" type="button" id="cancelBtn" style="display:none">Cancel</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Projects List -->
+            <div class="card" style="margin-top:24px">
+                <h3 style="margin:0 0 16px 0">All Projects (<span id="projectCount">0</span>)</h3>
+                <div id="projectsList"></div>
+            </div>
+
+            <!-- Updates List & Form -->
+            <div class="card" style="margin-top:18px">
+                <h3 style="margin:0 0 12px 0">Site Updates</h3>
+                <form id="updateForm" style="margin-bottom:12px">
+                    <input type="hidden" id="updateId">
+                    <div style="display:flex;gap:8px;flex-wrap:wrap">
+                        <input type="text" id="updateTitle" placeholder="Update title (e.g. New demo live)" style="flex:1;min-width:200px" required />
+                        <select id="updateStatus" style="width:160px">
+                            <option value="published">Published</option>
+                            <option value="draft">Draft</option>
+                        </select>
+                    </div>
+                    <div style="margin-top:8px">
+                        <textarea id="updateBody" placeholder="Short description" rows="3" style="width:100%"></textarea>
+                    </div>
+                    <div style="display:flex;gap:8px;margin-top:8px">
+                        <button class="btn" type="submit" id="addUpdateBtn">Add Update</button>
+                        <button class="btn ghost" type="button" id="cancelUpdateBtn" style="display:none">Cancel</button>
+                    </div>
+                </form>
+
+                <h4 style="margin:0 0 8px 0">All Updates</h4>
+                <div id="updatesList"></div>
+            </div>
+
+            <p style="margin-top:20px"><a href="index.html" class="btn ghost">← Back to site</a></p>
+        </main>
+    </div>
+
+    <script src="Scripts/admin.js"></script>
+</body>
+</html>

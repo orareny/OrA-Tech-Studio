@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Admin Login — OrA Tech Studio</title>
+    <link rel="stylesheet" href="main.css">
+    <style>
+        .login-container {
+            max-width: 400px;
+            margin: 80px auto;
+            padding: 32px;
+        }
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .error-msg {
+            color: #ff6b6b;
+            font-size: 14px;
+            margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="login-container card">
+            <h2 style="margin:0 0 8px 0">Admin Access</h2>
+            <p class="muted" style="margin:0 0 20px 0">Enter your password to manage the site.</p>
+            
+            <form class="login-form" id="loginForm">
+                <input 
+                    type="password" 
+                    id="password" 
+                    placeholder="Password" 
+                    required 
+                    autocomplete="current-password"
+                />
+                <button class="btn" type="submit">Login</button>
+                <div id="errorMsg" class="error-msg" style="display:none"></div>
+            </form>
+
+            <p style="margin-top:20px"><a href="index.html" class="btn ghost">← Back to site</a></p>
+        </div>
+    </div>
+
+    <script>
+        // Get saved password or use default
+        const ADMIN_PASSWORD = localStorage.getItem('adminPassword') || 'OrA2025!';
+        
+        const form = document.getElementById('loginForm');
+        const passwordInput = document.getElementById('password');
+        const errorMsg = document.getElementById('errorMsg');
+
+        // Check if already logged in
+        if (localStorage.getItem('adminAuth') === 'true') {
+            window.location.href = 'admin.html';
+        }
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const password = passwordInput.value;
+
+            if (password === ADMIN_PASSWORD) {
+                // Store auth state
+                localStorage.setItem('adminAuth', 'true');
+                localStorage.setItem('adminLoginTime', Date.now().toString());
+                window.location.href = 'admin.html';
+            } else {
+                errorMsg.textContent = 'Incorrect password. Please try again.';
+                errorMsg.style.display = 'block';
+                passwordInput.value = '';
+                passwordInput.focus();
+            }
+        });
+    </script>
+</body>
+</html>

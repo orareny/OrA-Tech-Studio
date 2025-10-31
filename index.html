@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>OrA Tech Studio — Software • Music • Games • AI</title>
+    <meta name="description" content="OrA Tech Studio — software technology, music production, game development and AI solutions." />
+    <!-- Canonical & social metadata for public address -->
+    <link rel="canonical" href="https://oratechstudio.com/">
+    <meta property="og:site_name" content="OrA Tech Studio">
+    <meta property="og:title" content="OrA Tech Studio — Software • Music • Games • AI">
+    <meta property="og:description" content="OrA Tech Studio — software technology, music production, game development and AI solutions.">
+    <meta property="og:url" content="https://oratechstudio.com/">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a class="brand" href="#">
+                <div class="logo">OTS</div>
+                <div>
+                    <div  style="font-weight:800">OrA Tech Studio</div>
+                    <div class="small">Software • Music • Games • AI</div>
+                </div>
+            </a>
+            <!-- Navigation removed per user request (brand remains) -->
+        </header>
+
+        <main>
+            <section class="hero">
+                <div>
+                    <h1>Where code meets <span class="gradient-word gradient-word--lg">creativity</span>. from AI to music and games.</h1>
+                    <p>Hey everyone! I'm Or, and welcome to my personal website. Here you can explore all the projects I've created and am still working on. Feel free to try out the available demos and share your feedback — I'd love to hear what you think.</p>
+                    <div class="cta">
+                        <!-- 'Get started' removed per request; only See portfolio remains -->
+                        <a class="btn btn--large" href="#portfolio">See portfolio</a>
+                    </div>
+
+                    <div class="card quick" style="margin-top:18px;">
+                        <div style="display:flex;justify-content:space-between;align-items:center">
+                            <div>
+                                <div class="small">Featured offering</div>
+                                <strong>End-to-end product development</strong>
+                            </div>
+                            <div class="small">Est. timelines: 4-16 weeks</div>
+                        </div>
+
+                        <div class="service-list">
+                            <a class="service" href="software.html">
+                                <!-- software icon -->
+                                <svg viewBox="0 0 24 24" fill="none" aria-hidden>
+                                    <rect width="24" height="24" rx="6" fill="#7c6cff"/>
+                                    <path d="M8 12h8M8 16h8M8 8h8" stroke="#022019" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <div>
+                                    <h4>Software Engineering</h4>
+                                    <p>Web & mobile apps, APIs, cloud infrastructure and integrations.</p>
+                                </div>
+                            </a>
+
+                            <a class="service" href="music.html">
+                                <!-- music icon -->
+                                <svg viewBox="0 0 24 24" fill="none" aria-hidden>
+                                    <rect width="24" height="24" rx="6" fill="#6ee7b7"/>
+                                    <path d="M9 9v7a3 3 0 1 0 2 0V7l6-2v7" stroke="#022019" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <div>
+                                    <h4>Music Production</h4>
+                                    <p>Composition, mixing, mastering and sound design for media.</p>
+                                </div>
+                            </a>
+
+                            <a class="service" href="games.html">
+                                <!-- games icon -->
+                                <svg viewBox="0 0 24 24" fill="none" aria-hidden>
+                                    <rect width="24" height="24" rx="6" fill="#ffb86b"/>
+                                    <path d="M8 12h8M12 8v8" stroke="#2a1400" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <div>
+                                    <h4>Game Development & Design</h4>
+                                    <p>Prototyping, gameplay systems, systems & level design, and cross-platform releases.</p>
+                                </div>
+                            </a>
+
+                            <a class="service" href="ai.html">
+                                <!-- ai icon -->
+                                <svg viewBox="0 0 24 24" fill="none" aria-hidden>
+                                    <rect width="24" height="24" rx="6" fill="#7dd3fc"/>
+                                    <path d="M7 12c1.333-4 8-4 9 0" stroke="#02293a" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <div>
+                                    <h4>AI & ML</h4>
+                                    <p>Custom models, automation and intelligent features to scale workflows.</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Updates column (right) -->
+                <div>
+                    <div class="card updates-card" style="min-height:360px">
+                        <h3 style="margin:0 0 10px 0">Updates</h3>
+                        <p class="muted" style="margin:0 0 12px 0">Latest site news, releases and projects in development.</p>
+                        <div id="updatesContainer">
+                            <!-- populated by Scripts/updates.js -->
+                        </div>
+                        <!-- 'Manage updates' button removed (admin access is via admin files directly) -->
+                    </div>
+                </div>
+
+                <!-- Quick facts aside removed as requested -->
+            </section>
+
+            <!-- Selected work section removed — no projects uploaded yet -->
+
+            <section id="contact" class="contact">
+                <div>
+                            <h3 style="margin:0 0 6px 0">Feedback & support</h3>
+                            <p class="muted" style="margin:0 0 12px 0">Report a bug, suggest improvements or send general feedback — we’ll reply within 2 business days.</p>
+
+                            <form id="contactForm">
+                                <input type="text" id="name" placeholder="Your name" required />
+                                <input type="email" id="email" placeholder="Email address" required />
+                                <label for="type" class="small" style="margin-top:6px">Message type</label>
+                                <select id="type" style="padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit">
+                                    <option value="feedback">Feedback</option>
+                                    <option value="bug">Bug report</option>
+                                    <option value="other">Other</option>
+                                </select>
+                                <input type="text" id="subject" placeholder="Subject (optional)" />
+                                <textarea id="message" placeholder="Describe the issue or feedback"></textarea>
+                                <div style="display:flex;gap:10px;align-items:center">
+                                    <button class="btn" type="submit">Send feedback</button>
+                                    <button class="btn ghost" type="button" id="demoBtn">Report issue</button>
+                                </div>
+                                <div id="formResult" aria-live="polite"></div>
+                            </form>
+                </div>
+
+                <!-- Contact aside removed — feedback & support form is the canonical contact channel -->
+            </section>
+
+            <footer>
+                <div>© <span id="year"></span> OrA Tech Studio — Built with care</div>
+            </footer>
+        </main>
+    </div>
+
+    <script>
+        // small interactive behavior for the contact form
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        const form = document.getElementById('contactForm');
+        const result = document.getElementById('formResult');
+
+        form.addEventListener('submit', function(e){
+            e.preventDefault();
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const subject = document.getElementById('subject').value.trim() || 'Project inquiry';
+            const message = document.getElementById('message').value.trim();
+
+                // Basic validation
+                if (!name || !email) {
+                    result.innerHTML = '<div class="success" style="background:transparent;color:var(--accent)">Please provide name and email.</div>';
+                    return;
+                }
+
+                // Build subject including type
+                const type = document.getElementById('type') ? document.getElementById('type').value : 'feedback';
+                const subjectInput = document.getElementById('subject').value.trim();
+                const prefix = (type === 'bug') ? 'Bug report' : (type === 'feedback' ? 'Feedback' : 'Message');
+                const finalSubject = subjectInput ? `${prefix}: ${subjectInput}` : prefix;
+
+                // Open user's mail client with prefilled content as a quick demo fallback
+                const body = 'Name: ' + name + '\nEmail: ' + email + '\nType: ' + type + '\n\n' + message;
+                const mailto = `mailto:orarni68@gmail.com?subject=${encodeURIComponent(finalSubject)}&body=${encodeURIComponent(body)}`;
+                window.location.href = mailto;
+
+                result.innerHTML = '<div class="success">Opening mail client — or send feedback to orarni68@gmail.com</div>';
+        });
+
+        document.getElementById('demoBtn').addEventListener('click', function(){
+            result.innerHTML = '<div class="success">Thanks — we will follow up to schedule a demo.</div>';
+        });
+
+        // Smooth scrolling for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(a=>{
+            a.addEventListener('click', function(e){
+                const id = this.getAttribute('href');
+                if (id === '#') return;
+                const el = document.querySelector(id);
+                if (el){
+                    e.preventDefault();
+                    el.scrollIntoView({behavior:'smooth', block:'start'});
+                }
+            });
+        });
+
+        // Show admin link only if logged in — guarded in case element is removed
+        const _adminLink = document.getElementById('adminLink');
+        if (_adminLink && localStorage.getItem('adminAuth')) {
+            _adminLink.style.display = 'inline-block';
+        }
+    </script>
+    <script src="Scripts/updates.js"></script>
+</body>
+</html>
