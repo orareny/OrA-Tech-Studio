@@ -56,8 +56,8 @@
         <main>
             <div class="admin-header">
                 <div>
-                    <h2 style="margin:0">Project Manager</h2>
-                    <p class="muted" style="margin:4px 0 0 0">Add, edit and manage your portfolio projects</p>
+                    <h2 style="margin:0">Site Updates Manager</h2>
+                    <p class="muted" style="margin:4px 0 0 0">Manage site news and external project links</p>
                 </div>
                 <div style="display:flex;gap:8px;align-items:center">
                     <button class="btn ghost btn-small" onclick="changePassword()">🔑 Change Password</button>
@@ -65,20 +65,46 @@
                 </div>
             </div>
 
-            <!-- Add/Edit Project Form -->
+            <!-- Site Updates Section (enlarged) -->
             <div class="card">
-                <h3 style="margin:0 0 16px 0" id="formTitle">Add New Project</h3>
-                <form class="project-form" id="projectForm">
-                    <input type="hidden" id="projectId">
-                    
+                <h3 style="margin:0 0 12px 0">Site Updates</h3>
+                <p class="muted" style="margin:0 0 16px 0">Post news, project releases, and status updates for your homepage</p>
+                <form id="updateForm" style="margin-bottom:18px">
+                    <input type="hidden" id="updateId">
+                    <div style="display:flex;gap:8px;flex-wrap:wrap">
+                        <input type="text" id="updateTitle" placeholder="Update title (e.g. New game demo live on itch.io)" style="flex:1;min-width:200px" required />
+                        <select id="updateStatus" style="width:160px">
+                            <option value="published">Published</option>
+                            <option value="draft">Draft</option>
+                        </select>
+                    </div>
+                    <div style="margin-top:8px">
+                        <textarea id="updateBody" placeholder="Short description (e.g., 'New 2D platformer now available for testing')" rows="4" style="width:100%"></textarea>
+                    </div>
+                    <div style="display:flex;gap:8px;margin-top:8px">
+                        <button class="btn" type="submit" id="addUpdateBtn">Add Update</button>
+                        <button class="btn ghost" type="button" id="cancelUpdateBtn" style="display:none">Cancel</button>
+                    </div>
+                </form>
+
+                <h4 style="margin:12px 0 8px 0">All Updates</h4>
+                <div id="updatesList"></div>
+            </div>
+
+            <!-- External Links Manager (for topic pages) -->
+            <div class="card" style="margin-top:24px">
+                <h3 style="margin:0 0 12px 0">External Project Links</h3>
+                <p class="muted" style="margin:0 0 16px 0">Add links to your external portfolios (itch.io, GitHub, SoundCloud, etc.)</p>
+                <form id="linkForm" class="project-form" style="margin-bottom:18px;padding:16px">
+                    <input type="hidden" id="linkId">
                     <div class="form-row">
                         <div>
-                            <label class="small" for="projectName">Project Name*</label>
-                            <input type="text" id="projectName" placeholder="e.g., Cloud Collaboration Tool" required>
+                            <label class="small" for="linkTitle">Link Title*</label>
+                            <input type="text" id="linkTitle" placeholder="e.g., My Games on itch.io" required>
                         </div>
                         <div>
-                            <label class="small" for="projectCategory">Category*</label>
-                            <select id="projectCategory" required>
+                            <label class="small" for="linkCategory">Category*</label>
+                            <select id="linkCategory" required>
                                 <option value="">Select category</option>
                                 <option value="software">Software Engineering</option>
                                 <option value="music">Music Production</option>
@@ -87,59 +113,24 @@
                             </select>
                         </div>
                     </div>
-
-                    <div>
-                        <label class="small" for="projectDescription">Description</label>
-                        <textarea id="projectDescription" placeholder="Brief description of the project" rows="3"></textarea>
-                    </div>
-
                     <div class="form-row">
                         <div>
-                            <label class="small" for="projectTags">Tags (comma-separated)</label>
-                            <input type="text" id="projectTags" placeholder="e.g., React, Node, SaaS">
+                            <label class="small" for="linkUrl">URL*</label>
+                            <input type="url" id="linkUrl" placeholder="https://username.itch.io" required>
                         </div>
                         <div>
-                            <label class="small" for="projectLink">Project Link (optional)</label>
-                            <input type="url" id="projectLink" placeholder="https://...">
+                            <label class="small" for="linkDescription">Short Description</label>
+                            <input type="text" id="linkDescription" placeholder="e.g., Collection of indie games">
                         </div>
                     </div>
-
                     <div style="display:flex;gap:10px">
-                        <button class="btn" type="submit" id="submitBtn">Add Project</button>
-                        <button class="btn ghost" type="button" id="cancelBtn" style="display:none">Cancel</button>
-                    </div>
-                </form>
-            </div>
-
-            <!-- Projects List -->
-            <div class="card" style="margin-top:24px">
-                <h3 style="margin:0 0 16px 0">All Projects (<span id="projectCount">0</span>)</h3>
-                <div id="projectsList"></div>
-            </div>
-
-            <!-- Updates List & Form -->
-            <div class="card" style="margin-top:18px">
-                <h3 style="margin:0 0 12px 0">Site Updates</h3>
-                <form id="updateForm" style="margin-bottom:12px">
-                    <input type="hidden" id="updateId">
-                    <div style="display:flex;gap:8px;flex-wrap:wrap">
-                        <input type="text" id="updateTitle" placeholder="Update title (e.g. New demo live)" style="flex:1;min-width:200px" required />
-                        <select id="updateStatus" style="width:160px">
-                            <option value="published">Published</option>
-                            <option value="draft">Draft</option>
-                        </select>
-                    </div>
-                    <div style="margin-top:8px">
-                        <textarea id="updateBody" placeholder="Short description" rows="3" style="width:100%"></textarea>
-                    </div>
-                    <div style="display:flex;gap:8px;margin-top:8px">
-                        <button class="btn" type="submit" id="addUpdateBtn">Add Update</button>
-                        <button class="btn ghost" type="button" id="cancelUpdateBtn" style="display:none">Cancel</button>
+                        <button class="btn" type="submit" id="submitLinkBtn">Add Link</button>
+                        <button class="btn ghost" type="button" id="cancelLinkBtn" style="display:none">Cancel</button>
                     </div>
                 </form>
 
-                <h4 style="margin:0 0 8px 0">All Updates</h4>
-                <div id="updatesList"></div>
+                <h4 style="margin:12px 0 8px 0">All External Links (<span id="linkCount">0</span>)</h4>
+                <div id="linksList"></div>
             </div>
 
             <p style="margin-top:20px"><a href="index.html" class="btn ghost">← Back to site</a></p>

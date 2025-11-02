@@ -24,15 +24,50 @@
         </header>
 
         <main>
-            <h2>Game Development & Design — Projects</h2>
-            <p class="muted">Playable prototypes and releases.</p>
+            <h2>Game Development & Design</h2>
+            <p class="muted">Explore my games and prototypes on the platforms below:</p>
 
-            <div id="projectsContainer" style="margin-top:12px"></div>
+            <div id="linksContainer" style="margin-top:24px"></div>
 
             <p style="margin-top:18px"><a href="index.html" class="btn ghost">← Back</a></p>
         </main>
     </div>
 
-    <script src="Scripts/projects.js"></script>
+    <script>
+        // Load and display external links for this category
+        function getLinks() {
+            const stored = localStorage.getItem('externalLinks');
+            return stored ? JSON.parse(stored) : [];
+        }
+
+        function renderLinks() {
+            const allLinks = getLinks();
+            const categoryLinks = allLinks.filter(link => link.category === 'games');
+            const container = document.getElementById('linksContainer');
+            
+            if (categoryLinks.length === 0) {
+                container.innerHTML = '<div class="card"><p class="muted">No external links added yet. Check back soon!</p></div>';
+                return;
+            }
+            
+            container.innerHTML = categoryLinks.map(link => `
+                <div class="card" style="margin-bottom:16px">
+                    <h3 style="margin:0 0 8px 0">${escapeHtml(link.title)}</h3>
+                    ${link.description ? `<p class="muted" style="margin:0 0 12px 0">${escapeHtml(link.description)}</p>` : ''}
+                    <a href="${link.url}" target="_blank" rel="noopener noreferrer" class="btn">
+                        Visit Project →
+                    </a>
+                </div>
+            `).join('');
+        }
+
+        function escapeHtml(s){
+            if (!s) return '';
+            return s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;');
+        }
+
+        // Render on page load
+        renderLinks();
+    </script>
 </body>
 </html>

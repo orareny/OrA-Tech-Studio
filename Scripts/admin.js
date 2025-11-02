@@ -288,3 +288,124 @@ function deleteUpdate(id) {
 
 // Render updates on load
 renderUpdates();
+
+// --- External Links Management (for topic pages) ---
+function getLinks() {
+    const stored = localStorage.getItem('externalLinks');
+    return stored ? JSON.parse(stored) : [];
+}
+
+function saveLinks(links) {
+    localStorage.setItem('externalLinks', JSON.stringify(links));
+}
+
+function renderLinks() {
+    const links = getLinks();
+    const container = document.getElementById('linksList');
+    const countEl = document.getElementById('linkCount');
+    
+    if (!container || !countEl) return;
+    
+    countEl.textContent = links.length;
+    
+    if (links.length === 0) {
+        container.innerHTML = '<p class="muted">No external links yet. Add links to your portfolios (itch.io, GitHub, etc.) above.</p>';
+        return;
+    }
+    
+    container.innerHTML = links.map(link => `
+        <div class="project-item">
+            <div>
+                <strong>${escapeHtml(link.title)}</strong>
+                <span class="muted"> — ${getCategoryName(link.category)}</span>
+                <br><a href="${link.url}" target="_blank" class="muted" style="font-size:13px">${link.url}</a>
+                ${link.description ? `<br><small class="muted">${escapeHtml(link.description)}</small>` : ''}
+            </div>
+            <div class="project-actions">
+                <button class="btn btn-small ghost" onclick="editLink('${link.id}')">Edit</button>
+                <button class="btn btn-small btn-danger" onclick="deleteLink('${link.id}')">Delete</button>
+            </div>
+        </div>
+    `).join('');
+}
+
+// Add/Update link
+const linkForm = document.getElementById('linkForm');
+if (linkForm) {
+    linkForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const links = getLinks();
+        const id = document.getElementById('linkId').value;
+        
+        const link = {
+            id: id || generateId(),
+            title: document.getElementById('linkTitle').value,
+            category: document.getElementById('linkCategory').value,
+            url: document.getElementById('linkUrl').value,
+            description: document.getElementById('linkDescription').value,
+            createdAt: id ? links.find(l => l.id === id).createdAt : new Date().toISOString(),
+            updatedAt: new Date().toISOString()
+        };
+        
+        if (id) {
+            // Update existing
+            const index = links.findIndex(l => l.id === id);
+            links[index] = link;
+        } else {
+            // Add new
+            links.push(link);
+        }
+        
+        saveLinks(links);
+        renderLinks();
+        resetLinkForm();
+    });
+}
+
+// Edit link
+function editLink(id) {
+    const links = getLinks();
+    const link = links.find(l => l.id === id);
+    
+    if (!link) return;
+    
+    document.getElementById('linkId').value = link.id;
+    document.getElementById('linkTitle').value = link.title;
+    document.getElementById('linkCategory').value = link.category;
+    document.getElementById('linkUrl').value = link.url;
+    document.getElementById('linkDescription').value = link.description;
+    
+    document.getElementById('submitLinkBtn').textContent = 'Update Link';
+    document.getElementById('cancelLinkBtn').style.display = 'block';
+    
+    window.scrollTo({ top: document.getElementById('linkForm').offsetTop - 20, behavior: 'smooth' });
+}
+
+// Delete link
+function deleteLink(id) {
+    if (!confirm('Are you sure you want to delete this link?')) return;
+    
+    const links = getLinks();
+    const filtered = links.filter(l => l.id !== id);
+    saveLinks(filtered);
+    renderLinks();
+}
+
+// Reset link form
+function resetLinkForm() {
+    if (!document.getElementById('linkForm')) return;
+    document.getElementById('linkForm').reset();
+    document.getElementById('linkId').value = '';
+    document.getElementById('submitLinkBtn').textContent = 'Add Link';
+    document.getElementById('cancelLinkBtn').style.display = 'none';
+}
+
+// Cancel link edit
+const cancelLinkBtn = document.getElementById('cancelLinkBtn');
+if (cancelLinkBtn) {
+    cancelLinkBtn.addEventListener('click', resetLinkForm);
+}
+
+// Initial render for links
+renderLinks();
